@@ -23,3 +23,4 @@
 /home/renas/workspace/C#ToDo/C#ToDo/obj/Debug/net8.0/C#ToDo.pdb
 /home/renas/workspace/C#ToDo/C#ToDo/obj/Debug/net8.0/C#ToDo.genruntimeconfig.cache
 /home/renas/workspace/C#ToDo/C#ToDo/obj/Debug/net8.0/ref/C#ToDo.dll
+/home/renas/workspace/C#ToDo/C#ToDo/obj/Debug/net8.0/C#ToDo.sourcelink.json
