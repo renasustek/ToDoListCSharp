@@ -1,20 +1,13 @@
-// Program.cs
-// This file implements a simple command-line interface for managing tasks,
-// now using a dedicated TaskService class for business logic.
 
 using System;
 using System.Collections.Generic;
-using ToDo; // Required to access the Task class and ImportanceLevel enum
-
+using ToDo; 
 namespace toDoApplication
 {
     class Program
     {
-        // Connection string for the MySQL database.
-        // IMPORTANT: Replace 'your_strong_password' with the actual password you set in docker-compose.yml.
         private const string ConnectionString = "Server=127.0.0.1;Port=3306;Database=todo_db;Uid=root;Pwd=your_strong_password;";
 
-        // Instance of the TaskService to handle all business operations.
         private static TaskService? _taskService;
 
         static void Main(string[] args)
@@ -22,12 +15,9 @@ namespace toDoApplication
             Console.WriteLine("Welcome to the ToDo Application (Service Layer Version)!");
             Console.WriteLine("---");
 
-            // Initialize the TaskRepository and inject it into the TaskService.
-            // This is where we wire up the dependencies.
             TaskRepository taskRepository = new TaskRepository(ConnectionString);
             _taskService = new TaskService(taskRepository);
 
-            // Test database connection on startup
             if (!_taskService.TestDatabaseConnection())
             {
                 Console.WriteLine("Failed to connect to the database. Please ensure MySQL Docker container is running and accessible.");
@@ -37,7 +27,6 @@ namespace toDoApplication
             }
             Console.WriteLine("Successfully connected to the database!");
 
-            // Main application loop
             while (true)
             {
                 DisplayMenu();
@@ -70,7 +59,6 @@ namespace toDoApplication
             }
         }
 
-        // Displays the main menu options to the user.
         static void DisplayMenu()
         {
             Console.WriteLine("Commands:");
@@ -82,7 +70,6 @@ namespace toDoApplication
             Console.Write("Enter command: ");
         }
 
-        // Handles adding a new task using the service layer.
         static void AddTask()
         {
             Console.Write("Enter task description: ");
@@ -109,7 +96,6 @@ namespace toDoApplication
             _taskService?.AddTask(description, importance);
         }
 
-        // Lists all tasks using the service layer.
         static void ListTasks()
         {
             List<ToDo.Task> tasks = _taskService?.GetAllTasks() ?? new List<ToDo.Task>();
@@ -128,7 +114,6 @@ namespace toDoApplication
             Console.WriteLine("------------------");
         }
 
-        // Handles removing a task using the service layer.
         static void RemoveTask()
         {
             Console.Write("Enter the ID (first 8 chars of GUID) of the task to remove: ");
@@ -137,7 +122,6 @@ namespace toDoApplication
             _taskService?.RemoveTask(idInput);
         }
 
-        // Handles altering an existing task using the service layer.
         static void AlterTask()
         {
             Console.Write("Enter the ID (first 8 chars of GUID) of the task to alter: ");
