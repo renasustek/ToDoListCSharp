@@ -2,7 +2,6 @@ using System;
 
 namespace ToDo
 {
-    // Define the ImportanceLevel enum within the same namespace as the Task class.
     public enum ImportanceLevel
     {
         WasteOfTime = 1,
@@ -24,9 +23,10 @@ namespace ToDo
 
         public DateTime DateAdded { get; set; }
 
+    
         public Task(string description, ImportanceLevel importance)
         {
-            Id = Guid.NewGuid(); 
+            Id = Guid.NewGuid();
             Description = description;
             IsCompleted = false; 
             Importance = importance;
@@ -35,7 +35,7 @@ namespace ToDo
 
         public override string ToString()
         {
-            return $"{Description} (Importance: {Importance}) - {(IsCompleted ? "Completed" : "Pending")} (Added: {DateAdded.ToShortDateString()})";
+            return $"[{Id.ToString().Substring(0, 8)}...] {Description} (Importance: {Importance}) - {(IsCompleted ? "Completed" : "Pending")} (Added: {DateAdded.ToShortDateString()})";
         }
     }
 }
